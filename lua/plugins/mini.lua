@@ -1,21 +1,48 @@
 return {
 	{
+		"nvim-mini/mini.nvim",
+		event = "VeryLazy",
+		version = false,
+		config = function()
+			require("mini.ai").setup()
+			require("mini.surround").setup()
+			require("mini.move").setup()
+			require("mini.cursorword").setup()
+
+			require("mini.splitjoin").setup({
+				mappings = { toggle = "J" },
+			})
+
+			require("mini.basics").setup({
+				options = {
+					basic = false,
+				},
+				mappings = {
+					basic = true,
+					windows = true,
+					move_with_alt = true,
+				},
+				autocommands = {
+					basic = true,
+				},
+			})
+		end,
+	},
+
+	-- mini.files
+	{
 		"nvim-mini/mini.files",
 		opts = {},
 		keys = { "<leader>ee" },
 		config = function()
-			-- NOTE: keymaps
 			local MiniFiles = require("mini.files")
-
-			-- vim.keymap.set("n", "<leader>ee", function()
-			-- 	MiniFiles.open()
-			-- end, { desc = "Open MiniFiles" })
 
 			vim.keymap.set("n", "<leader>ee", function()
 				MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
 			end, { desc = "Open MiniFiles (current file)" })
 
-			-- note: show_dotfiles
+			-- function: show_dotfiles
+			-- keymap: g.
 			local show_dotfiles = true
 
 			local filter_show = function()
@@ -38,34 +65,6 @@ return {
 					local buf_id = args.data.buf_id
 					vim.keymap.set("n", "g.", toggle_dotfiles, { buffer = buf_id })
 				end,
-			})
-		end,
-	},
-	{
-		"nvim-mini/mini.nvim",
-		event = "VeryLazy",
-		version = false,
-		config = function()
-			require("mini.ai").setup()
-			require("mini.surround").setup()
-			require("mini.move").setup()
-
-			require("mini.basics").setup({
-				options = {
-					basic = false,
-				},
-				mappings = {
-					basic = true,
-					windows = true,
-					move_with_alt = true,
-				},
-				autocommands = {
-					basic = true,
-				},
-			})
-
-			require("mini.splitjoin").setup({
-				mappings = { toggle = "J" },
 			})
 		end,
 	},
