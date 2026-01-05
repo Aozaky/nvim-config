@@ -11,7 +11,7 @@ vim.keymap.set({ "n", "v" }, "L", "$")
 -- 删除全局 LSP 默认键位
 vim.keymap.del("n", "gra")
 vim.keymap.del("n", "gri")
-vim.keymap.del("n", "grn")
+-- vim.keymap.del("n", "grn")
 vim.keymap.del("n", "grr")
 vim.keymap.del("n", "grt")
 vim.keymap.del("n", "gO")

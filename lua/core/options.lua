@@ -27,11 +27,11 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 
 -- 折叠
-vim.o.foldmethod = "expr"
-vim.o.foldexpr = "nvim_treesitter#foldexpr()"
-vim.o.foldlevel = 99
-vim.o.foldlevelstart = 99
-vim.o.foldenable = true
+-- vim.o.foldmethod = "expr"
+-- vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+-- vim.o.foldlevel = 99
+-- vim.o.foldlevelstart = 99
+-- vim.o.foldenable = true
 
 -- 诊断配置
 vim.schedule(function()

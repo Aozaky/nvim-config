@@ -16,15 +16,6 @@ return {
 				enable = true,
 				additional_vim_regex_highlighting = false,
 			},
-			incremental_selection = {
-				enable = true,
-				keymaps = {
-					init_selection = "gii",
-					node_incremental = "gin",
-					scope_incremental = "gic",
-					node_decremental = "gid",
-				},
-			},
 			textobjects = {
 				select = {
 					enable = true,

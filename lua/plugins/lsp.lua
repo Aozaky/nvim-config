@@ -49,12 +49,10 @@ return {
 					map("<leader>ws", telescope.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 
 					map("<leader>ca", "<Cmd>Lspsaga code_action<CR>")
-					map("<leader>rn", "<Cmd>Lspsaga rename<CR>")
+					map("<leader>rn", "grn")
 					map("gd", "<Cmd>Lspsaga goto_definition<CR>")
 					map("gkd", "<Cmd>Lspsaga peek_definition<CR>")
 					map("gr", "<Cmd>Lspsaga finder<CR>")
-					map("]d", "<Cmd>Lspsaga diagnostic_jump_next<CR>")
-					map("[d", "<Cmd>Lspsaga diagnostic_jump_prev<CR>")
 				end,
 			})
 		end,
