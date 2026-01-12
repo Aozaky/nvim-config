@@ -6,6 +6,7 @@ vim.o.shiftwidth = 0
 
 vim.o.autoread = true
 vim.o.mouse = "a"
+vim.opt.mousemoveevent = true
 
 -- 外观
 vim.o.cursorline = true
@@ -16,6 +17,7 @@ vim.o.winborder = "rounded"
 vim.o.breakindent = true
 vim.o.undofile = true
 vim.o.scrolloff = 10
+vim.opt.termguicolors = true
 
 -- 分屏
 vim.o.splitbelow = true

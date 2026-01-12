@@ -1,18 +1,27 @@
 return {
 	"akinsho/bufferline.nvim",
-  event = "VeryLazy",
+	event = "VeryLazy",
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
 	},
-	opts = {
-		options = {
-			diagnostics = "nvim_lsp",
-			diagnostics_indicator = function(count, level)
-				local icon = level:match("error") and " " or " "
-				return " " .. icon .. count
-			end,
-		},
-	},
+	config = function()
+		local bufferline = require("bufferline")
+		bufferline.setup({
+			options = {
+				style_preset = bufferline.style_preset.minimal,
+				hover = {
+					enabled = true,
+					delay = 10,
+					reveal = { "close" },
+				},
+				diagnostics = "nvim_lsp",
+				diagnostics_indicator = function(count, level)
+					local icon = level:match("error") and " " or " "
+					return " " .. icon .. count
+				end,
+			},
+		})
+	end,
 	keys = {
 		{ "<C-[>", "<Cmd>BufferLineCyclePrev<CR>", silent = true },
 		{ "<C-]>", "<Cmd>BufferLineCycleNext<CR>", silent = true },
