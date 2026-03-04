@@ -10,7 +10,7 @@ return {
 	{
 		"saghen/blink.cmp",
 		version = "1.*",
-		event = "InsertEnter",
+		event = { "InsertEnter", "CmdwinEnter" },
 		dependencies = { "L3MON4D3/LuaSnip" },
 		opts = {
 			keymap = { preset = "super-tab" },
