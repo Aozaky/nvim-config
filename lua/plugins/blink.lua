@@ -1,20 +1,11 @@
 return {
 	{
-		"L3MON4D3/LuaSnip",
-		version = "^2.*",
-		build = "make install_jsregexp",
-		dependencies = {
-			"rafamadriz/friendly-snippets",
-		},
-	},
-	{
 		"saghen/blink.cmp",
 		version = "1.*",
 		event = { "InsertEnter", "CmdwinEnter" },
-		dependencies = { "L3MON4D3/LuaSnip" },
+		dependencies = { "rafamadriz/friendly-snippets" },
 		opts = {
 			keymap = { preset = "super-tab" },
-			snippets = { preset = "luasnip" },
 			sources = {
 				default = { "lazydev", "lsp", "path", "snippets", "buffer" },
 				providers = {
@@ -73,19 +64,5 @@ return {
 			fuzzy = { implementation = "prefer_rust_with_warning" },
 		},
 		opts_extend = { "sources.default" },
-		config = function(_, opts)
-			require("blink.cmp").setup(opts)
-			require("luasnip.loaders.from_vscode").lazy_load()
-
-			-- Jump forward
-			vim.keymap.set({ "i", "s" }, "<C-j>", function()
-				return require("luasnip").jump(1)
-			end)
-
-			-- Jump backward
-			vim.keymap.set({ "i", "s" }, "<C-k>", function()
-				return require("luasnip").jump(-1)
-			end)
-		end,
 	},
 }
