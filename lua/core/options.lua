@@ -28,13 +28,6 @@ vim.o.incsearch = true -- 边输入边搜索
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
--- 折叠
--- vim.o.foldmethod = "expr"
--- vim.o.foldexpr = "nvim_treesitter#foldexpr()"
--- vim.o.foldlevel = 99
--- vim.o.foldlevelstart = 99
--- vim.o.foldenable = true
-
 -- 诊断配置
 vim.schedule(function()
 	vim.diagnostic.config({
@@ -64,5 +57,18 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
 	pattern = "*.env",
 	callback = function()
 		vim.bo.filetype = "dosini"
+	end,
+})
+
+-- Java 使用 4 个空格缩进
+local indent_group = vim.api.nvim_create_augroup("IndentSettings", { clear = true })
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "java",
+	group = indent_group,
+	callback = function()
+		vim.opt.softtabstop = 4
+		vim.opt_local.tabstop = 4
+		vim.opt_local.shiftwidth = 0
 	end,
 })

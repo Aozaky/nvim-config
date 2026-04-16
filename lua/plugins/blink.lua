@@ -5,7 +5,11 @@ return {
 		event = { "InsertEnter", "CmdwinEnter" },
 		dependencies = { "rafamadriz/friendly-snippets" },
 		opts = {
-			keymap = { preset = "super-tab" },
+			keymap = {
+				preset = "super-tab",
+				["<C-h>"] = { "cancel", "fallback" },
+				["<C-e>"] = false,
+			},
 			sources = {
 				default = { "lazydev", "lsp", "path", "snippets", "buffer" },
 				providers = {
@@ -32,16 +36,13 @@ return {
 					auto_show = true,
 					window = { scrollbar = false },
 				},
-				-- trigger = {
-				-- 	show_in_snippet = false,
-				-- },
-				-- list = {
-				-- 	selection = {
-				-- 		preselect = function(ctx)
-				-- 			return not require("blink.cmp").snippet_active({ direction = 1 })
-				-- 		end,
-				-- 	},
-				-- },
+				list = {
+					selection = {
+						preselect = function()
+							return not require("blink.cmp").snippet_active({ direction = 1 })
+						end,
+					},
+				},
 				ghost_text = { enabled = false },
 			},
 			cmdline = {

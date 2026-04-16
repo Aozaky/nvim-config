@@ -22,7 +22,6 @@ local formatters_by_ft = {
 	lua = { "stylua" },
 	python = { "isort", "black" },
 	bash = { "shfmt" },
-	java = { "google-java-format" },
 }
 
 for _, ft in ipairs(prettier_fts) do
