@@ -17,10 +17,14 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Setup lazy.nvim
 require("lazy").setup({
+	ui = {
+		backdrop = 100,
+		border = "rounded",
+	},
 	spec = {
 		{ import = "plugins" },
 	},
-	install = { colorscheme = { "catppuccin" } },
+	install = { colorscheme = { "rose-pine" } },
 	checker = {
 		enabled = true,
 		notify = false,

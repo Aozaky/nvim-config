@@ -5,7 +5,6 @@ return {
 			char = { enabled = false },
 		},
 	},
-	event = "VeryLazy",
 	keys = {
 		{
 			"ss",

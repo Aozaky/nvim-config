@@ -1,4 +1,4 @@
-local prettier = { "prettierd", "prettier", stop_after_first = true }
+local prettier = { "prettierd", stop_after_first = true }
 
 local prettier_fts = {
 	"javascript",
@@ -36,7 +36,10 @@ return {
 		{
 			"<leader><leader>f",
 			function()
-				require("conform").format({ async = true })
+				require("conform").format({
+					async = true,
+					lsp_format = "fallback",
+				})
 			end,
 			desc = "Format buffer",
 		},

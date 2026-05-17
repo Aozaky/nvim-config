@@ -29,7 +29,7 @@ return {
 		end,
 	},
 
-	-- mini.files
+	-- NOTE: mini.files
 	{
 		"nvim-mini/mini.files",
 		opts = {},

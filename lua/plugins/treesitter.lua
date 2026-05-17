@@ -14,7 +14,11 @@ return {
 		opts = {
 			ignore_install = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
 			auto_install = true,
-			highlight = { enable = true },
+			highlight = {
+				enable = true,
+				disable = { "ghostty" },
+				additional_vim_regex_highlighting = false,
+			},
 			indent = { enable = true },
 		},
 	},
