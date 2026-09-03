@@ -2,25 +2,28 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
-		branch = "main",
 		lazy = false,
 		config = function()
-			vim.treesitter.language.register("bash", "zsh")
+			vim.api.nvim_create_autocmd("FileType", {
+				group = vim.api.nvim_create_augroup("treesitter.setup", { clear = true }),
+				callback = function(args)
+					local language = vim.treesitter.language.get_lang(args.match) or args.match
+					-- 跳过不存在的 parser
+					if not require("nvim-treesitter.parsers")[language] then
+						return
+					end
+					if not vim.treesitter.language.add(language) then
+						-- NOTE: 自动安装
+						require("nvim-treesitter").install(language)
+						return
+					end
+					-- NOTE: 语法高亮
+					vim.treesitter.start(args.buf, language)
+					-- NOTE: 打开缩进
+					vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+				end,
+			})
 		end,
-	},
-	{
-		"MeanderingProgrammer/treesitter-modules.nvim",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		opts = {
-			ignore_install = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
-			auto_install = true,
-			highlight = {
-				enable = true,
-				disable = { "ghostty" },
-				additional_vim_regex_highlighting = false,
-			},
-			indent = { enable = true },
-		},
 	},
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
@@ -31,20 +34,14 @@ return {
 
 		config = function()
 			require("nvim-treesitter-textobjects").setup({
-				select = { lookahead = true },
 				move = { set_jumps = true },
 			})
 
 			-- KEYMAPS
-			local map_select = function(keys, func)
-				vim.keymap.set({ "x", "o" }, keys, func)
-			end
-
 			local map_move = function(keys, func)
 				vim.keymap.set({ "n", "x", "o" }, keys, func)
 			end
 
-			local select = require("nvim-treesitter-textobjects.select").select_textobject
 			local goto_next = require("nvim-treesitter-textobjects.move").goto_next_start
 			local goto_previous = require("nvim-treesitter-textobjects.move").goto_previous_start
 			local ts_repeat_move = require("nvim-treesitter-textobjects.repeatable_move")
@@ -74,71 +71,11 @@ return {
 			map_move("[s", function()
 				goto_previous("@local.scope", "locals")
 			end)
-
-			-- fold
-			map_move("]z", function()
-				goto_next("@fold", "folds")
-			end)
-			map_move("[z", function()
-				goto_previous("@fold", "folds")
-			end)
-
-			-- SELECT
-			-- function
-			map_select("if", function()
-				select("@function.inner", "textobjects")
-			end)
-			map_select("af", function()
-				select("@function.outer", "textobjects")
-			end)
-
-			-- return
-			map_select("ir", function()
-				select("@return.inner", "textobjects")
-			end)
-			map_select("ar", function()
-				select("@return.outer", "textobjects")
-			end)
-
-			-- Class
-			map_select("iC", function()
-				select("@class.outer", "textobjects")
-			end)
-			map_select("aC", function()
-				select("@class.outer", "textobjects")
-			end)
-
-			-- arugument
-			map_select("ia", function()
-				select("@parameter.outer", "textobjects")
-			end)
-			map_select("aa", function()
-				select("@parameter.outer", "textobjects")
-			end)
-
-			-- number
-			map_select("in", function()
-				select("@number.outer", "textobjects")
-			end)
-			map_select("an", function()
-				select("@number.outer", "textobjects")
-			end)
-
-			-- conditional
-			map_select("ic", function()
-				select("@conditional.outer", "textobjects")
-			end)
-			map_select("ac", function()
-				select("@conditional.outer", "textobjects")
-			end)
-
-			-- loop
-			map_select("il", function()
-				select("@loop.outer", "textobjects")
-			end)
-			map_select("al", function()
-				select("@loop.outer", "textobjects")
-			end)
 		end,
+	},
+	{
+		-- ghostty 高亮
+		"bezhermoso/tree-sitter-ghostty",
+		build = "make nvim_install",
 	},
 }
