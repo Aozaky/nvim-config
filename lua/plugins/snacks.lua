@@ -12,16 +12,13 @@ return {
 			indent = {},
 			notifier = {},
 			picker = {
-				previewers = {
-					diff = {
-						style = "syntax",
-					},
-				},
 				sources = { explorer = { follow_file = true } },
 				ui_select = true,
 				layout = {
 					layout = {
 						backdrop = false,
+						width = 0.8,
+						min_width = 60,
 					},
 				},
 				win = {
@@ -35,7 +32,7 @@ return {
     -- stylua: ignore
 		keys = {
       -- explorer
-			{ "<leader>ef", function() Snacks.explorer.open() end, desc = "打开当前文件目录" },
+			{ "<leader>ef", function() Snacks.explorer.open() end },
 
       -- Search
 			{ "<leader>sf", function() Snacks.picker.files() end, desc = "[S]earch [F]iles" },

@@ -7,6 +7,7 @@ vim.o.shiftwidth = 0
 vim.o.autoread = true
 vim.o.mouse = "a"
 vim.opt.mousemoveevent = true
+vim.opt.mousescroll = "ver:1,hor:6"
 
 -- 外观
 vim.o.cursorline = true
